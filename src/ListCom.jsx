@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DeleteIcon from '@material-ui/icons/Delete';
 export default function ListCom(props) {
+    const [line,setLine] = useState(false);
+
+    const cutIt = () => {
+        setLine(true);
+    }
   return (
     <div className="todo_style">
-        <span>
+        <span onClick={cutIt}>
             <DeleteIcon className='deleteIcon' />
         </span>
-        <li>{props.text}</li>
+        <li style={{textDecoration: line ? 'line-through' : 'none'}}>{props.text}</li>
     </div>
   )
 }
