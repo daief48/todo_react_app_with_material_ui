@@ -1,7 +1,22 @@
+import React,{useState} from 'react';
 import './App.css';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import ListCom from './ListCom';
 function App() {
+  const [item, setItem] = useState("");
+  const [newitem, setNewItem] = useState([]);
+  const itemEvent = (event) => {
+    setItem(event.target.value);
+  }
+
+  const listofItems = () => {
+    console.log("hi");
+    setNewItem((preValue) => {
+      return [...preValue,item];
+    });
+    setItem(" ");
+  }
   return (
     <>
       <div className="main_div">
@@ -9,13 +24,15 @@ function App() {
           <br />
           <h1>ToDo List</h1>
           <br />
-          <input type="text" placeholder='Add an Items' />
-          <Button className='newBtn'>
+          <input type="text" value={item} placeholder='Add an Items' onChange={itemEvent}/>
+          <Button className='newBtn' onClick={listofItems}>
             <AddIcon />
           </Button>
           <br />
           <ol>
-            <li>Buy an apple</li>
+            {newitem.map((val) =>{
+              return <ListCom text = {val}/>
+            })}
           </ol>
         </div>
       </div>
